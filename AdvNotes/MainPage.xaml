@@ -6,13 +6,18 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:local="clr-namespace:AdvNotes"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696" 
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
-
+    
+    <phone:PhoneApplicationPage.Resources>
+        <local:DateConverter x:Key="DateConverter"/>
+    </phone:PhoneApplicationPage.Resources>
+    
     <!--Data context is set to sample data above and LayoutRoot contains the root grid where all other page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -45,7 +50,7 @@
                       <StackPanel Margin="0,0,0,17" Width="432" Height="78">
                           <TextBlock Text="{Binding Title}" 
                                      Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                          <TextBlock Text="{Binding Modified}" 
+                            <TextBlock Text="{Binding Modified, Converter={StaticResource DateConverter}}" 
                                      Margin="12,-6,12,0" 
                                      Style="{StaticResource PhoneTextSubtleStyle}"/>
                       </StackPanel>

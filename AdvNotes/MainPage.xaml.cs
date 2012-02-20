@@ -39,8 +39,8 @@ namespace AdvNotes
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            if (this.DataContext == null)
-                this.DataContext = Settings.NotesList.Value;
+            if (DataContext == null)
+                DataContext = Settings.NotesList.Value;
 
             // Show some context when no notes available
             if (Settings.NotesList.Value.Count == 0)

@@ -4,6 +4,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using System;
 using Microsoft.Phone.Tasks;
+using System.Device.Location;
 
 namespace AdvNotes
 {
@@ -12,13 +13,72 @@ namespace AdvNotes
 
         // 0 -> Other ; 1 -> edit (Want to show keyboard in this state)
         int state = 0;
+        // Text extracted from note object
         string detailText = "";
+        // Location placeholder
+        string location = "";
+        // Index for pulling the right note object
         int noteIndex = 0;
+        // Back button pressed boolean for auto deleting empty notes.
+        bool backPress = false;
         
         // Constructor
         public DetailsPage()
         {
             InitializeComponent();
+        }
+
+        private void PhoneApplicationPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Show keyboard if new note added
+            if (noteTextBlock.Text.Length == 0)         
+                noteTextBlock.Focus();
+
+            // Get location data only if new note
+            if (noteIndex == 0)
+            {
+                // When the page is instantiated, we'll begin the process
+                // of acquiring the physical location of the user to 
+                // add to the note's file name.  This is async, requiring
+                // us to implement a __Completed event.
+                try
+                {
+                    GeoCoordinateWatcher myWatcher = new GeoCoordinateWatcher();
+
+                    var myPosition = myWatcher.Position;
+
+                    // In this case,since we're not working with a device, I'll just
+                    // set a default value.  If we cannot get the current location,
+                    // then we'll default to Redmond, WA.
+                    double latitude = 47.674;
+                    double longitude = -122.12;
+
+                    if (!myPosition.Location.IsUnknown)
+                    {
+                        latitude = myPosition.Location.Latitude;
+                        longitude = myPosition.Location.Longitude;
+                    }
+
+                    myTerraService.TerraServiceSoapClient client = new myTerraService.TerraServiceSoapClient();
+
+                    client.ConvertLonLatPtToNearestPlaceCompleted += new EventHandler<myTerraService.ConvertLonLatPtToNearestPlaceCompletedEventArgs>(client_ConvertLonLatPtToNearestPlaceCompleted);
+
+                    client.ConvertLonLatPtToNearestPlaceAsync(new myTerraService.LonLatPt() { Lat = latitude, Lon = longitude });
+                }
+                catch
+                {
+                    // Ignore ... for now
+                }
+            }
+        }
+
+        void client_ConvertLonLatPtToNearestPlaceCompleted(object sender, myTerraService.ConvertLonLatPtToNearestPlaceCompletedEventArgs e)
+        {
+            // This async event occurs when we successfully get a
+            // response from calling the TerraService web service.
+            // This event handler is attached in the Add() constructor.
+            location = e.Result;
+            PageTitle.Text = location;
         }
 
         // When page is navigated to set data context to selected item in list
@@ -39,19 +99,17 @@ namespace AdvNotes
             {
                 detailText = noteTextBlock.Text = n.GetContent();
             }
-
-            // Show keyboard if user was in edit state or new note added
-            if (noteTextBlock.Text.Length == 0 || Settings.appState.Value == 1)
-            {
+            
+            // Show keyboard if user was in edit state
+            if (Settings.appState.Value == 1)
                 prepEdit();
-            }
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
 
-            if (detailText != noteTextBlock.Text)
+            if ((detailText != noteTextBlock.Text))// || ((noteTextBlock.Text.Length ==0) && !backPress))
             {
                 // Automatically save the new content
                 Notes n = Settings.NotesList.Value[noteIndex];
@@ -74,6 +132,20 @@ namespace AdvNotes
 
                 n.Modified = DateTimeOffset.Now;
             }
+        }
+
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            base.OnBackKeyPress(e);
+            backPress = true;
+            /*
+            if (noteTextBlock.Text.Length == 0)
+            {
+                Notes n = Settings.NotesList.Value[noteIndex];
+                n.DeleteContent();
+                Settings.NotesList.Value.Remove(n);
+            } 
+             */
         }
 
         // Event Handlers
@@ -112,6 +184,7 @@ namespace AdvNotes
             if (MessageBox.Show("Are you sure you want to delete this note?",
                 "Delete note?", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
+                noteTextBlock.Text = "";
                 Notes n = Settings.NotesList.Value[noteIndex];
                 n.DeleteContent();
                 Settings.NotesList.Value.Remove(n);
