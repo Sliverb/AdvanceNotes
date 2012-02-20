@@ -12,3 +12,8 @@ c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\obj\De
 c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\obj\Debug\AdvNotes.dll
 c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\obj\Debug\AdvNotes.pdb
 c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\obj\Debug\XapCacheFile.xml
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\Bin\Debug\AdvSetting.dll
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\Bin\Debug\Images\appbar.delete.rest.png
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\Bin\Debug\Images\appbar.add.rest.png
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\Bin\Debug\Images\appbar.email.rest.png
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\Bin\Debug\Images\appbar.settings.rest.png

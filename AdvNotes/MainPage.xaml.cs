@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using System.Windows.Navigation;
 
 namespace AdvNotes
 {
@@ -19,10 +20,6 @@ namespace AdvNotes
         public MainPage()
         {
             InitializeComponent();
-
-            // Set the data context of the listbox control to the sample data
-            DataContext = App.ViewModel;
-            this.Loaded += new RoutedEventHandler(MainPage_Loaded);
         }
 
         // Handle selection changed on ListBox
@@ -39,13 +36,47 @@ namespace AdvNotes
             MainListBox.SelectedIndex = -1;
         }
 
-        // Load data for the ViewModel Items
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (!App.ViewModel.IsDataLoaded)
-            {
-                App.ViewModel.LoadData();
-            }
+            base.OnNavigatedTo(e);
+            if (this.DataContext == null)
+                this.DataContext = Settings.NotesList.Value;
+
+            // Show some context when no notes available
+            if (Settings.NotesList.Value.Count == 0)
+                EmptyListBlock.Visibility = System.Windows.Visibility.Visible;
+            else
+                EmptyListBlock.Visibility = System.Windows.Visibility.Collapsed;
         }
+
+        private void appBar_new(object sender, EventArgs e)
+        {
+            // Create a new note and add it to the top of the list
+            // Later on sort by last modified
+            Notes newNote = new Notes();
+            newNote.Filename = Guid.NewGuid().ToString();
+            newNote.Modified = DateTimeOffset.Now;
+            Settings.NotesList.Value.Insert(0, newNote);
+
+            // Navigate to details page URI with the new note
+            NavigationService.Navigate(new Uri("/DetailsPage.xaml?selectedItem=0", UriKind.Relative));
+        }
+
+        private void appBar_help(object sender, EventArgs e)
+        {
+            MessageBox.Show("Help page on Route");
+            //NavigationService.Navigate(new Uri("/HelpPage.xaml?", UriKind.Relative));
+        }
+
+        private void appBar_setting(object sender, EventArgs e)
+        {
+            MessageBox.Show("Settings page on Route");
+        }
+
+        private void appBar_about(object sender, EventArgs e)
+        {
+            MessageBox.Show("About page on Route");
+        }
+
     }
 }
