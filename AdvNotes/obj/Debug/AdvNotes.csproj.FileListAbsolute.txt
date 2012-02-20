@@ -1,0 +1,14 @@
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\Bin\Debug\ApplicationIcon.png
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\Bin\Debug\Background.png
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\Bin\Debug\AdvNotes.dll
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\Bin\Debug\AdvNotes.pdb
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\Bin\Debug\AppManifest.xaml
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\Bin\Debug\AdvNotes.xap
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\obj\Debug\ResolveAssemblyReference.cache
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\obj\Debug\App.g.i.cs
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\obj\Debug\DetailsPage.g.i.cs
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\obj\Debug\MainPage.g.i.cs
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\obj\Debug\AdvNotes.g.resources
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\obj\Debug\AdvNotes.dll
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\obj\Debug\AdvNotes.pdb
+c:\users\baolatun\documents\visual studio 2010\Projects\AdvNotes\AdvNotes\obj\Debug\XapCacheFile.xml
