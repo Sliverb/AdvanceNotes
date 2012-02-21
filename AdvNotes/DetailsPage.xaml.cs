@@ -108,8 +108,11 @@ namespace AdvNotes
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-
-            if ((detailText != noteTextBlock.Text))// || ((noteTextBlock.Text.Length ==0) && !backPress))
+            if ((noteTextBlock.Text.Length ==0) && backPress)
+            {
+                deleteNote();
+            }
+            else if ((detailText != noteTextBlock.Text))// || ((noteTextBlock.Text.Length ==0) && !backPress))
             {
                 // Automatically save the new content
                 Notes n = Settings.NotesList.Value[noteIndex];
@@ -138,14 +141,6 @@ namespace AdvNotes
         {
             base.OnBackKeyPress(e);
             backPress = true;
-            /*
-            if (noteTextBlock.Text.Length == 0)
-            {
-                Notes n = Settings.NotesList.Value[noteIndex];
-                n.DeleteContent();
-                Settings.NotesList.Value.Remove(n);
-            } 
-             */
         }
 
         // Event Handlers
@@ -184,10 +179,7 @@ namespace AdvNotes
             if (MessageBox.Show("Are you sure you want to delete this note?",
                 "Delete note?", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                noteTextBlock.Text = "";
-                Notes n = Settings.NotesList.Value[noteIndex];
-                n.DeleteContent();
-                Settings.NotesList.Value.Remove(n);
+                deleteNote();
 
                 if (this.NavigationService.CanGoBack)
                     this.NavigationService.GoBack();
@@ -200,7 +192,14 @@ namespace AdvNotes
 
         # region Helpers
 
-        public void scrollJump()
+        private void deleteNote()
+        {
+            Notes n = Settings.NotesList.Value[noteIndex];
+            n.DeleteContent();
+            Settings.NotesList.Value.Remove(n);
+        }
+
+        private void scrollJump()
         {
             noteScrollViewer.ScrollToVerticalOffset(noteTextBlock.ActualHeight);
         }
