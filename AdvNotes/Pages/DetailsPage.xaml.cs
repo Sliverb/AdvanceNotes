@@ -1,12 +1,12 @@
-﻿using System.Windows;
+﻿using System;
+using System.Device.Location;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
-using System;
 using Microsoft.Phone.Tasks;
-using System.Device.Location;
 
-namespace AdvNotes
+namespace AdvNotes.Pages
 {
     public partial class DetailsPage : PhoneApplicationPage
     {

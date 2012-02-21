@@ -2,5 +2,7 @@
   <Deployment.Parts>
     <AssemblyPart x:Name="AdvNotes" Source="AdvNotes.dll" />
     <AssemblyPart x:Name="AdvSetting" Source="AdvSetting.dll" />
+    <AssemblyPart x:Name="Microsoft.Phone.Controls.Toolkit" Source="Microsoft.Phone.Controls.Toolkit.dll" />
+    <AssemblyPart x:Name="Microsoft.Phone.Controls" Source="Microsoft.Phone.Controls.dll" />
   </Deployment.Parts>
 </Deployment>

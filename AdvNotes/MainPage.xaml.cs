@@ -30,7 +30,7 @@ namespace AdvNotes
                 return;
 
             // Navigate to the new page
-            NavigationService.Navigate(new Uri("/DetailsPage.xaml?selectedItem=" + MainListBox.SelectedIndex, UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Pages/DetailsPage.xaml?selectedItem=" + MainListBox.SelectedIndex, UriKind.Relative));
 
             // Reset selected index to -1 (no selection)
             MainListBox.SelectedIndex = -1;
@@ -59,7 +59,7 @@ namespace AdvNotes
             Settings.NotesList.Value.Insert(0, newNote);
 
             // Navigate to details page URI with the new note
-            NavigationService.Navigate(new Uri("/DetailsPage.xaml?selectedItem=0", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Pages/DetailsPage.xaml?selectedItem=0", UriKind.Relative));
         }
 
         private void appBar_help(object sender, EventArgs e)
