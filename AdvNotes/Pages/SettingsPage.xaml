@@ -13,7 +13,21 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
-
+    <UserControl.Resources>     
+        <DataTemplate x:Key="DataTemplate">
+            <Border CornerRadius="3">
+                <TextBlock Text="{Binding}" FontFamily="{Binding}" />
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="FullModeItemDataTemplate">
+            <Grid>
+                <TextBlock FontSize="40" Text="{Binding}" FontFamily="{Binding}" />
+            </Grid>
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="ItemsPanelTemplate">
+            <StackPanel />
+        </ItemsPanelTemplate>
+    </UserControl.Resources>
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -23,18 +37,115 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="BaioTech" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="Settings" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <toolkit:ToggleSwitch Name="FluxToggle"
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <toolkit:ToggleSwitch Name="LocationToggle"
+                                  Grid.Row="0"
+                                  Grid.ColumnSpan="2"
                                   Content="Enabled" 
                                   IsChecked="true"
                                   Header="Tag Notes with Location" 
                                   Checked="ToggleSwitch_Checked" 
                                   Unchecked="ToggleSwitch_Unchecked" />
+            
+            <toolkit:ListPicker Name="FontFamilyPicker"
+                                Grid.Row="1"
+                                Grid.ColumnSpan="2"
+                                Header="Font"
+                                ItemsSource="{Binding FontFamilyCollection}"
+                                FullModeItemTemplate="{StaticResource FullModeItemDataTemplate}"
+                                ItemTemplate="{StaticResource DataTemplate}" 
+                                />
+
+            <TextBlock Name="FontColorBlock"
+                       Grid.Row="2" 
+                       Grid.Column="0" 
+                       Text="Font color"
+                       Foreground="{StaticResource PhoneSubtleBrush}" 
+                       Margin="12,8"/>
+            <Rectangle Name="FontColorRectangle"
+                       Grid.Row="3" 
+                       Grid.Column="0"                       
+                       Height="90"
+                       StrokeThickness="3"
+                       Margin="{StaticResource PhoneHorizontalMargin}"
+                       Stroke="{StaticResource PhoneForegroundBrush}"                   
+                       MouseLeftButtonUp="FontColorRectangle_MouseLeftButtonUp"/>
+
+            <TextBlock Name="BackgroundColorBlock"
+                       Grid.Row="2" 
+                       Grid.Column="1"
+                       Text="Background color"
+                       Foreground="{StaticResource PhoneSubtleBrush}" 
+                       Margin="12,8"/>
+            <Rectangle Name="BackgroundColorRectangle" 
+                       Grid.Row="3" 
+                       Grid.Column="1"
+                       Height="90"
+                       StrokeThickness="3"
+                       Margin="{StaticResource PhoneHorizontalMargin}"
+                       Stroke="{StaticResource PhoneForegroundBrush}"                       
+                       MouseLeftButtonUp="BackgroundColorRectangle_MouseLeftButtonUp"/>
+
+            <TextBlock Name="FontSizeBlock"
+                       Grid.Row="4" 
+                       Grid.ColumnSpan="2"
+                       Text="Font Size"
+                       Foreground="{StaticResource PhoneSubtleBrush}" 
+                       Margin="12,20,12,-14"/>
+            <Grid Grid.Row="5" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Slider Name="FontSizeSlider" 
+                    Minimum="12" 
+                    Maximum="100" 
+                    ValueChanged="FontSizeSlider_ValueChanged"/>
+                <Button Name="ResetButton" 
+                        Grid.Column="1" 
+                        Content="reset" 
+                        VerticalAlignment="Top" 
+                        Click="ResetButton_Click"/>
+            </Grid>
+            
+            <Border Name="test"
+                    Background="Blue"
+                    Grid.Row="6"
+                    Grid.ColumnSpan="2"
+                    BorderThickness="3" 
+                    Margin="{StaticResource PhoneHorizontalMargin}"                   
+                    BorderBrush="{StaticResource PhoneForegroundBrush}">    
+            <TextBlock Name="SampleText"
+                       Text="Sample text."               
+                       Foreground="Black"
+                       Padding="12"/>
+            </Border>
+
+            <Rectangle Grid.Row="7" 
+                       Grid.ColumnSpan="2" 
+                       Fill="Transparent"
+                       Margin="12, 10, 12, 10" />
+
         </Grid>
     </Grid>
  

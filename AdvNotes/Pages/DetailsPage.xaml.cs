@@ -16,7 +16,7 @@ namespace AdvNotes.Pages
         // Text extracted from note object
         string detailText = "";
         // Location placeholder
-        string location = "";
+        //string location = "";
         // Index for pulling the right note object
         int noteIndex = 0;
         // Back button pressed boolean for auto deleting empty notes.
@@ -34,6 +34,7 @@ namespace AdvNotes.Pages
             if (noteTextBlock.Text.Length == 0)         
                 noteTextBlock.Focus();
 
+            /**
             // Get location data only if new note
             if (noteIndex == 0)
             {
@@ -68,10 +69,12 @@ namespace AdvNotes.Pages
                 catch
                 {
                     // Ignore ... for now
-                }
+                }           
             }
+            **/
         }
 
+        /**
         void client_ConvertLonLatPtToNearestPlaceCompleted(object sender, myTerraService.ConvertLonLatPtToNearestPlaceCompletedEventArgs e)
         {
             // This async event occurs when we successfully get a
@@ -80,6 +83,7 @@ namespace AdvNotes.Pages
             location = e.Result;
             PageTitle.Text = location;
         }
+        **/
 
         // When page is navigated to set data context to selected item in list
         protected override void OnNavigatedTo(NavigationEventArgs e)

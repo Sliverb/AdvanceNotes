@@ -70,7 +70,8 @@ namespace AdvNotes
 
         private void appBar_setting(object sender, EventArgs e)
         {
-            MessageBox.Show("Settings page on Route");
+            //MessageBox.Show("Settings page on Route");
+            NavigationService.Navigate(new Uri("/Pages/SettingsPage.xaml", UriKind.Relative));
         }
 
         private void appBar_about(object sender, EventArgs e)
