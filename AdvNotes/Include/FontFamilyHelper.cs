@@ -20,11 +20,55 @@ namespace AdvNotes.Include
         {
             var fontFamilies = new ObservableCollection<FontFamily>();
             fontFamilies.Add(new FontFamily("Arial"));
+            fontFamilies.Add(new FontFamily("Calibri"));
+            fontFamilies.Add(new FontFamily("Comic Sans MS"));
+            fontFamilies.Add(new FontFamily("Courier New"));
+            fontFamilies.Add(new FontFamily("Georgia"));
+            fontFamilies.Add(new FontFamily("Lucida Sans Unicode"));
+            fontFamilies.Add(new FontFamily("Malgun Gothic"));
+            fontFamilies.Add(new FontFamily("Meiryo UI"));
+            fontFamilies.Add(new FontFamily("Microsoft YaHei"));
+            fontFamilies.Add(new FontFamily("Segoe UI"));
+            fontFamilies.Add(new FontFamily("Segoe WP"));
+            fontFamilies.Add(new FontFamily("Tahoma"));
+            fontFamilies.Add(new FontFamily("Tahoma Bold"));
+            fontFamilies.Add(new FontFamily("Times New Roman"));
+            fontFamilies.Add(new FontFamily("Trebuchet MS"));
+            fontFamilies.Add(new FontFamily("Verdana"));
+            return fontFamilies;
+        }
+
+        private static ObservableCollection<FontFamily> GetBoldFontFamilies()
+        {
+            var fontFamilies = new ObservableCollection<FontFamily>();
+            fontFamilies.Add(new FontFamily("Arial Black"));
+            fontFamilies.Add(new FontFamily("Arial Bold"));
+            fontFamilies.Add(new FontFamily("Calibri Bold"));
+            fontFamilies.Add(new FontFamily("Comic Sans MS Bold"));
+            fontFamilies.Add(new FontFamily("Courier New Bold"));
+            fontFamilies.Add(new FontFamily("Georgia Bold"));
+            fontFamilies.Add(new FontFamily("Segoe UI Bold"));
+            fontFamilies.Add(new FontFamily("Segoe WP Black"));
+            fontFamilies.Add(new FontFamily("Segoe WP Bold"));
+            fontFamilies.Add(new FontFamily("Segoe WP Light"));
+            fontFamilies.Add(new FontFamily("Segoe WP Semibold"));
+            fontFamilies.Add(new FontFamily("Segoe WP SemiLight"));
+            fontFamilies.Add(new FontFamily("Tahoma Bold"));
+            fontFamilies.Add(new FontFamily("Times New Roman Bold"));
+            fontFamilies.Add(new FontFamily("Trebuchet MS Bold"));
+            fontFamilies.Add(new FontFamily("Verdana Bold"));
+            return fontFamilies;
+        }
+
+        private static ObservableCollection<FontFamily> GetAllFontFamilies()
+        {
+            var fontFamilies = new ObservableCollection<FontFamily>();
+            fontFamilies.Add(new FontFamily("Arial"));
             fontFamilies.Add(new FontFamily("Arial Black"));
             fontFamilies.Add(new FontFamily("Arial Bold"));
             fontFamilies.Add(new FontFamily("Arial Italic"));
             fontFamilies.Add(new FontFamily("Calibri"));
-            fontFamilies.Add(new FontFamily("Calibri Bold"));            
+            fontFamilies.Add(new FontFamily("Calibri Bold"));
             fontFamilies.Add(new FontFamily("Calibri Italic"));
             fontFamilies.Add(new FontFamily("Comic Sans MS"));
             fontFamilies.Add(new FontFamily("Comic Sans MS Bold"));

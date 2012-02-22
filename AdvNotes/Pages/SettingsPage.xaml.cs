@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using AdvNotes.Include;
+using System.Windows.Navigation;
+using System.IO.IsolatedStorage;
 
 namespace AdvNotes.Pages
 {
@@ -22,14 +18,48 @@ namespace AdvNotes.Pages
             this.DataContext = new FontFamilyHelper();
         }
 
-        private void ToggleSwitch_Checked(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
 
+            //MessageBox.Show(Settings.EnableLocation.Value.ToString());
+
+            //Get Font from name
+            FontFamily tempFF = new FontFamily(Settings.FontFam.Value);
+
+            // Show the saved settings
+            LocationToggle.IsChecked = Settings.EnableLocation.Value;
+            FontFamilyPicker.SelectedItem = tempFF;
+            FontColorRectangle.Fill = new SolidColorBrush(Settings.FontColor.Value);
+            BackgroundColorRectangle.Fill = new SolidColorBrush(Settings.BackgroundColor.Value);
+            FontSizeSlider.Value = Settings.FontSize.Value;
+            SampleBackground.Background = BackgroundColorRectangle.Fill;
+            SampleText.Foreground = FontColorRectangle.Fill;
+            SampleText.FontFamily = tempFF;
         }
 
-        private void ToggleSwitch_Unchecked(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            base.OnNavigatedFrom(e);
+            IsolatedStorageSettings.ApplicationSettings.Save();        
+        }
 
+        private void ToggleSwitch_Changed(object sender, RoutedEventArgs e)
+        {
+            bool LocValue = LocationToggle.IsChecked.Value;
+            Settings.EnableLocation.Value = LocValue;
+            if (LocValue)
+                LocationToggle.Content = "Enabled";
+            else
+                LocationToggle.Content = "Disabled";
+        }
+
+
+        private void FontFamilyPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //Settings.FontFam.Value;           
+            //MessageBox.Show(e.AddedItems.ToString());
+            //FontFamilyPicker.SelectedItem = FontFamilyPicker.SelectedItem;
         }
 
         private void FontColorRectangle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -44,12 +74,20 @@ namespace AdvNotes.Pages
 
         private void FontSizeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-
+            // Gets called during InitializeComponent
+            if (FontSizeSlider != null)
+            {
+                int FontSize = (int)Math.Round(FontSizeSlider.Value);
+                Settings.FontSize.Value = FontSize;
+                SampleText.FontSize = FontSize;
+            }
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
-           
+            int FontSize = Settings.FontSize.DefaultValue;
+            this.FontSizeSlider.Value = FontSize;
+            this.SampleText.FontSize = FontSize;
         }
     }
 }

@@ -57,15 +57,15 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            
+                        
             <toolkit:ToggleSwitch Name="LocationToggle"
                                   Grid.Row="0"
                                   Grid.ColumnSpan="2"
-                                  Content="Enabled" 
-                                  IsChecked="true"
+                                  Content="Disabled" 
+                                  IsChecked="false"
                                   Header="Tag Notes with Location" 
-                                  Checked="ToggleSwitch_Checked" 
-                                  Unchecked="ToggleSwitch_Unchecked" />
+                                  Checked="ToggleSwitch_Changed" 
+                                  Unchecked="ToggleSwitch_Changed" />
             
             <toolkit:ListPicker Name="FontFamilyPicker"
                                 Grid.Row="1"
@@ -74,6 +74,7 @@
                                 ItemsSource="{Binding FontFamilyCollection}"
                                 FullModeItemTemplate="{StaticResource FullModeItemDataTemplate}"
                                 ItemTemplate="{StaticResource DataTemplate}" 
+                                SelectionChanged="FontFamilyPicker_SelectionChanged"
                                 />
 
             <TextBlock Name="FontColorBlock"
@@ -128,7 +129,7 @@
                         Click="ResetButton_Click"/>
             </Grid>
             
-            <Border Name="test"
+            <Border Name="SampleBackground"
                     Background="Blue"
                     Grid.Row="6"
                     Grid.ColumnSpan="2"

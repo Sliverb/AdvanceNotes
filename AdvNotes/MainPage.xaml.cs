@@ -75,8 +75,11 @@ namespace AdvNotes
         }
 
         private void appBar_about(object sender, EventArgs e)
-        {
-            MessageBox.Show("About page on Route");
+        {            
+            Object test = this.Resources["PhoneFontSizeMediumLarge"];
+            int tests = (int) float.Parse(test.ToString());
+
+            MessageBox.Show(tests.ToString());
         }
 
     }
