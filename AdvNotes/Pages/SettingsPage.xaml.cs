@@ -12,6 +12,8 @@ namespace AdvNotes.Pages
 {
     public partial class SettingsPage : PhoneApplicationPage
     {
+        bool eventOK = false;
+
         public SettingsPage()
         {
             InitializeComponent();
@@ -21,8 +23,6 @@ namespace AdvNotes.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-
-            //MessageBox.Show(Settings.EnableLocation.Value.ToString());
 
             //Get Font from name
             FontFamily tempFF = new FontFamily(Settings.FontFam.Value);
@@ -36,12 +36,9 @@ namespace AdvNotes.Pages
             SampleBackground.Background = BackgroundColorRectangle.Fill;
             SampleText.Foreground = FontColorRectangle.Fill;
             SampleText.FontFamily = tempFF;
-        }
 
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            base.OnNavigatedFrom(e);
-            IsolatedStorageSettings.ApplicationSettings.Save();        
+            // Ok to activate event listeners
+            eventOK = true;
         }
 
         private void ToggleSwitch_Changed(object sender, RoutedEventArgs e)
@@ -57,9 +54,17 @@ namespace AdvNotes.Pages
 
         private void FontFamilyPicker_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Settings.FontFam.Value;           
-            //MessageBox.Show(e.AddedItems.ToString());
-            //FontFamilyPicker.SelectedItem = FontFamilyPicker.SelectedItem;
+            if (e.RemovedItems != null && e.RemovedItems.Count > 0)
+            {
+                if (FontFamilyPicker.SelectedItem != null)
+                {
+                    if (eventOK)
+                    {
+                        Settings.FontFam.Value = FontFamilyPicker.SelectedItem.ToString();
+                    }
+                }
+
+            }
         }
 
         private void FontColorRectangle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -73,7 +78,7 @@ namespace AdvNotes.Pages
         }
 
         private void FontSizeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
+        {            
             // Gets called during InitializeComponent
             if (FontSizeSlider != null)
             {

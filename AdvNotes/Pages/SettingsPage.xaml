@@ -75,6 +75,7 @@
                                 FullModeItemTemplate="{StaticResource FullModeItemDataTemplate}"
                                 ItemTemplate="{StaticResource DataTemplate}" 
                                 SelectionChanged="FontFamilyPicker_SelectionChanged"
+                                CacheMode="BitmapCache"
                                 />
 
             <TextBlock Name="FontColorBlock"
