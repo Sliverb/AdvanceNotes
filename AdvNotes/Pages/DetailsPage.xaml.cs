@@ -5,6 +5,9 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
+using System.Windows.Media;
+using AdvNotes.Include;
+using System.IO.IsolatedStorage;
 
 namespace AdvNotes.Pages
 {
@@ -20,7 +23,7 @@ namespace AdvNotes.Pages
         // Index for pulling the right note object
         int noteIndex = 0;
         // Back button pressed boolean for auto deleting empty notes.
-        bool backPress = false;
+        //bool backPress = false;
         
         // Constructor
         public DetailsPage()
@@ -102,6 +105,13 @@ namespace AdvNotes.Pages
             if (n != null)
             {
                 detailText = noteTextBlock.Text = n.GetContent();
+                noteTextBlock.Background = new SolidColorBrush(Settings.BackgroundColor.Value);
+                noteTextBlock.Foreground = new SolidColorBrush(Settings.FontColor.Value);
+                noteTextBlock.FontFamily = new FontFamily(Settings.FontFam.Value);
+                noteTextBlock.FontSize = Settings.FontSize.Value;
+
+                string titleDate = n.Modified.LocalDateTime.ToLongDateString() + " " + n.Modified.LocalDateTime.ToShortTimeString();
+                PageTitle.Text = titleDate;
             }
             
             // Show keyboard if user was in edit state
@@ -112,11 +122,12 @@ namespace AdvNotes.Pages
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            if ((noteTextBlock.Text.Length ==0) && backPress)
+            if ((noteTextBlock.Text.Length == 0))// && backPress)
             {
-                deleteNote();
+                //deleteNote();
+                Settings.EmptyNoteIndex.Value = noteIndex;
             }
-            else if ((detailText != noteTextBlock.Text))// || ((noteTextBlock.Text.Length ==0) && !backPress))
+            if ((detailText != noteTextBlock.Text))// || ((noteTextBlock.Text.Length ==0) && !backPress))
             {
                 // Automatically save the new content
                 Notes n = Settings.NotesList.Value[noteIndex];
@@ -135,7 +146,8 @@ namespace AdvNotes.Pages
                 // Fold the remaining content into a single line. We can't use
                 // Environment.NewLine because it's \r\n, whereas newlines inserted from
                 // a text box are just \r
-                n.Title = title.Replace('\r', ' ');
+                //n.Title = title.Replace('\r', ' ');
+                n.Title = title.Remove(title.IndexOf('\r'));
 
                 n.Modified = DateTimeOffset.Now;
             }
@@ -144,7 +156,7 @@ namespace AdvNotes.Pages
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
         {
             base.OnBackKeyPress(e);
-            backPress = true;
+            //backPress = true;
         }
 
         // Event Handlers

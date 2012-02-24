@@ -30,7 +30,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Grid Background="Transparent">
+                        <Grid Background="{TemplateBinding Background}">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="CommonStates">
                                     <VisualState x:Name="Normal"/>
@@ -86,7 +86,7 @@
                                     <VisualState x:Name="Unfocused"/>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            <Border x:Name="EnabledBorder" BorderBrush="{StaticResource PhoneBackgroundBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{StaticResource PhoneBackgroundBrush}" Margin="{StaticResource PhoneTouchTargetOverhang}">
+                            <Border x:Name="EnabledBorder" BorderThickness="0" Background="Transparent" Margin="{StaticResource PhoneTouchTargetOverhang}">
                                 <ContentControl x:Name="ContentElement" BorderThickness="0" HorizontalContentAlignment="Stretch" Margin="{StaticResource PhoneTextBoxInnerMargin}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="Stretch" Foreground="{StaticResource PhoneContrastBackgroundBrush}"/>
                             </Border>
                             <Border x:Name="DisabledOrReadonlyBorder" BorderBrush="{StaticResource PhoneDisabledBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" Margin="{StaticResource PhoneTouchTargetOverhang}" Visibility="Collapsed">
@@ -107,7 +107,7 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,12">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,1,12,1">
             <TextBlock x:Name="PageTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
         </StackPanel>
 

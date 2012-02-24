@@ -11,6 +11,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using System.Windows.Navigation;
+using AdvNotes.Include;
 
 namespace AdvNotes
 {
@@ -39,6 +40,16 @@ namespace AdvNotes
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            int eNoteIndex = Settings.EmptyNoteIndex.Value;
+            if (eNoteIndex >= 0)
+            {
+                Notes n = Settings.NotesList.Value[eNoteIndex];
+                n.DeleteContent();
+                Settings.NotesList.Value.Remove(n);
+                Settings.EmptyNoteIndex.Value = -1;
+            }
+
             if (DataContext == null)
                 DataContext = Settings.NotesList.Value;
 
@@ -81,6 +92,5 @@ namespace AdvNotes
 
             MessageBox.Show(tests.ToString());
         }
-
     }
 }

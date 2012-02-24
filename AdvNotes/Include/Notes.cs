@@ -6,7 +6,7 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Windows.Media;
 
-namespace AdvNotes
+namespace AdvNotes.Include
 {
     public class Notes : INotifyPropertyChanged
     {
@@ -62,64 +62,6 @@ namespace AdvNotes
         }
 
         public string Filename { get; set; }
-
-        // Future implementation properties
-        # region Objects to be implemented later
-        int textSize;
-        public int TextSize
-        {
-            get { return this.textSize; }
-            set 
-            {
-                if (value != this.textSize)
-                {
-                    this.textSize = value; NotifyPropertyChanged("TextSize");
-                }
-            }
-        }
-
-        Color screenColor;
-        public Color ScreenColor
-        {
-            get { return this.screenColor; }
-            set
-            {
-                if (value != this.screenColor)
-                {
-                    this.screenColor = value;
-                    NotifyPropertyChanged("ScreenColor");
-                    NotifyPropertyChanged("ScreenBrush");
-                }
-            }
-        }
-
-        Color textColor;
-        public Color TextColor
-        {
-            get { return this.textColor; }
-            set
-            {
-                if (value != this.textColor)
-                {
-                    this.textColor = value;
-                    NotifyPropertyChanged("TextColor");
-                    NotifyPropertyChanged("TextBrush");
-                }
-            }
-        }
-
-        // Three readonly properties whose value is computed from other properties:
-
-        public Brush ScreenBrush
-        {
-            get { return new SolidColorBrush(this.ScreenColor); }
-        }
-
-        public Brush TextBrush
-        {
-            get { return new SolidColorBrush(this.TextColor); }
-        }
-        # endregion
 
         // Storage methods
         # region Methods dealing with ISO Storage

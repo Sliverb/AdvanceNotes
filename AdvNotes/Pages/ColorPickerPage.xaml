@@ -1,0 +1,126 @@
+﻿<!-- Copyright (c) Adam Nathan.  All rights reserved.
+     By purchasing the book that this source code belongs to, you may use and modify this code for commercial and non-commercial applications, but you may not publish the source code.
+     THE SOURCE CODE IS PROVIDED "AS IS", WITH NO WARRANTIES OR INDEMNITIES. -->
+<phone:PhoneApplicationPage 
+    x:Class="AdvNotes.Pages.ColorPickerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:local="clr-namespace:AdvNotes.Pages"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" mc:Ignorable="d" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" d:DesignHeight="800" d:DesignWidth="480">
+        <Canvas>
+
+        <Border Name="SaturationValuePanel" Canvas.Top="175" Canvas.Left="12" BorderBrush="{StaticResource PhoneForegroundBrush}" BorderThickness="3">
+            <Canvas Width="450" Height="450">            
+            <!-- Saturation gradient from white on left to full color on right -->
+            <Rectangle Width="450" Height="450">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Offset="0" Color="White"/>
+                        <GradientStop Offset="1" x:Name="HueGradientStop"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+            <!-- Value gradient from black on top to transparent on bottom -->      
+            <Rectangle Width="450" Height="450" Name="SaturationValueMap">
+                <Rectangle.Fill>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="Black"/>
+                        <GradientStop Offset="1" Color="Transparent"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
+            <!-- The current Saturation/Value selection: -->
+            <Line Name="SelectionLineX1" Y1="0" Y2="450" Stroke="Black" StrokeThickness="2"/>
+            <Line Name="SelectionLineX2" Y1="0" Y2="450" Stroke="White" StrokeThickness="2" StrokeDashArray="2,2"/>
+            <Line Name="SelectionLineY1" X1="0" X2="450" Stroke="Black" StrokeThickness="2"/>
+            <Line Name="SelectionLineY2" X1="0" X2="450" Stroke="White" StrokeThickness="2" StrokeDashArray="2,2"/>
+        </Canvas>
+        </Border>
+
+        <Canvas Name="HuePanel" Canvas.Top="673" Canvas.Left="12">
+            <TextBlock Text="hue" Canvas.Left="-2" Canvas.Top="-39" Foreground="{StaticResource PhoneForegroundBrush}" FontSize="24"/>
+
+            <Rectangle Width="456" Height="36" Name="HueSlider">
+                    <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Offset="0" Color="#f00"/>
+                        <GradientStop Offset=".167" Color="#ff0"/>
+                        <GradientStop Offset=".333" Color="#0f0"/>
+                        <GradientStop Offset=".5" Color="#0ff"/>
+                        <GradientStop Offset=".667" Color="#00f"/>
+                        <GradientStop Offset=".833" Color="#f0f"/>
+                        <GradientStop Offset="1" Color="#f00"/>
+                    </LinearGradientBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            <Rectangle Name="HueThumb" IsHitTestVisible="False" Width="16" Canvas.Top="-6" Height="48" Fill="{StaticResource PhoneForegroundBrush}" Stroke="{StaticResource PhoneBackgroundBrush}" StrokeThickness="3"/>
+        </Canvas>
+
+            <Canvas Name="AlphaPanel" Canvas.Top="752" Canvas.Left="12">
+                <TextBlock Text="opacity" Canvas.Left="-2" Canvas.Top="-39" Foreground="{StaticResource PhoneForegroundBrush}" FontSize="24"/>
+
+                <!-- checkerboard: -->
+                <Image Width="456" Height="36" Source="/Images/checkerboard.png" Stretch="None"/>
+
+                <Rectangle Width="456" Height="36" Name="AlphaSlider">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                            <GradientStop Offset="0" Color="#0f00" x:Name="alphaGradientStop2"/>
+                            <GradientStop Offset="1" Color="#ff00" x:Name="alphaGradientStop"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                <Rectangle Name="AlphaThumb" IsHitTestVisible="False" Width="16" Canvas.Top="-6" Height="48" Fill="{StaticResource PhoneForegroundBrush}" Stroke="{StaticResource PhoneBackgroundBrush}" StrokeThickness="3"/>
+            </Canvas>
+
+            <!-- color presets: -->
+            <ScrollViewer Name="ColorPresetsPanel" Canvas.Top="102" Width="480" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled" Background="Transparent">
+                <StackPanel Orientation="Horizontal">
+                <Button Name="FirstPresetButton" Width="65" Height="65" Background="{StaticResource PhoneAccentBrush}" Click="ColorPreset_Click"/>
+                <Button Width="65" Height="65" Background="Black" Click="ColorPreset_Click"/>
+                <Button Width="65" Height="65" Background="White" Click="ColorPreset_Click"/>
+                <Button Width="65" Height="65" Background="Red" Click="ColorPreset_Click"/>
+                <Button Width="65" Height="65" Background="Orange" Click="ColorPreset_Click"/>
+                <Button Width="65" Height="65" Background="Yellow" Click="ColorPreset_Click"/>
+                <Button Width="65" Height="65" Background="Lime" Click="ColorPreset_Click"/>
+                <Button Width="65" Height="65" Background="Green" Click="ColorPreset_Click"/>
+                <Button Width="65" Height="65" Background="Aqua" Click="ColorPreset_Click"/>
+                <Button Width="65" Height="65" Background="Blue" Click="ColorPreset_Click"/>
+                <Button Width="65" Height="65" Background="Purple" Click="ColorPreset_Click"/>
+                <Button Width="65" Height="65" Background="HotPink" Click="ColorPreset_Click"/>
+                <Button Width="65" Height="65" Background="Pink" Click="ColorPreset_Click"/>
+                <Button Width="65" Height="65" Background="Brown" Click="ColorPreset_Click"/>
+                <Button Width="65" Height="65" Background="Gray" Click="ColorPreset_Click"/>
+                <Button Width="65" Height="65" Background="DarkGray" Click="ColorPreset_Click"/>
+                <Canvas Name="TransparentPresetColor" Width="65" Height="65">
+                    <Image Width="41" Height="41" Margin="12" Source="/Images/checkerboard.png" Stretch="None"/>
+                    <Button Width="65" Height="65" Background="Transparent" Click="ColorPreset_Click"/>
+                </Canvas>
+            </StackPanel>
+            </ScrollViewer>
+
+        <!-- checkerboard: -->
+        <Rectangle Width="81" Height="81" Canvas.Left="292" Canvas.Top="12">
+            <Rectangle.Fill>
+                <ImageBrush ImageSource="/Images/checkerboard.png" Stretch="None"/>
+            </Rectangle.Fill>
+        </Rectangle>
+
+            <!-- selected color: -->
+        <Rectangle Width="81" Height="81" Canvas.Left="292" Canvas.Top="12" Name="PreviewTile"/>
+
+        <Button x:Name="ResetButton" IsEnabled="False" Canvas.Left="373" Height="105" Content="reset"/>
+        <!--local:Tilt.IsEnabled="True" -->
+
+        <TextBlock Text="pick a color" Foreground="{StaticResource PhoneForegroundBrush}" FontSize="38" Margin="9 -9 0 0"/>
+
+        <TextBox x:Name="ColorTextBox" Width="292" Canvas.Top="33"/>
+    </Canvas>
+
+</phone:PhoneApplicationPage>

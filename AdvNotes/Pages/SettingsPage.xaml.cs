@@ -69,12 +69,31 @@ namespace AdvNotes.Pages
 
         private void FontColorRectangle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            // Get a string representation of the colors, without the leading #
+            string currentColorString = Settings.FontColor.Value.ToString().Substring(1);
+            string defaultColorString = Settings.FontColor.DefaultValue.ToString().Substring(1);
 
+            // Navigate to the color picker
+            NavigationService.Navigate(new Uri(
+              "/Pages/ColorPickerPage.xaml?"
+              + "showOpacity=false"
+              + "&currentColor=" + currentColorString
+              + "&defaultColor=" + defaultColorString
+              + "&settingName=FontColor", UriKind.Relative));
         }
 
         private void BackgroundColorRectangle_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            // Get a string representation of the colors, without the leading #
+            string currentColorString = Settings.BackgroundColor.Value.ToString().Substring(1);
+            string defaultColorString = Settings.BackgroundColor.DefaultValue.ToString().Substring(1);
 
+            // Navigate to the color picker
+            this.NavigationService.Navigate(new Uri(
+              "/Pages/ColorPickerPage.xaml?"
+              + "&currentColor=" + currentColorString
+              + "&defaultColor=" + defaultColorString
+              + "&settingName=BackgroundColor", UriKind.Relative));
         }
 
         private void FontSizeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

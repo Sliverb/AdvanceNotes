@@ -3,8 +3,9 @@
 using System.Windows.Media;
 using System.Collections.ObjectModel;
 using Microsoft.Phone.Controls;
+using AdvNotes.Include;
 
-namespace AdvNotes
+namespace AdvNotes.Include
 {
     public static class Settings
     {
@@ -17,6 +18,8 @@ namespace AdvNotes
             new Setting<int>("CurrentNoteIndex", -1);
         public static readonly Setting<int> appState =
             new Setting<int>("MyState", 0);
+        public static readonly Setting<int> EmptyNoteIndex =
+            new Setting<int>("EmptyNoteIndex", -1);
 
         // User settings
         public static readonly Setting<bool> EnableLocation =

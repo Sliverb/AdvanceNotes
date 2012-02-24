@@ -23,4 +23,4 @@ C:\Users\baolatun\Documents\Visual Studio 2010\Projects\AdvNotes\AdvNotes\Bin\De
 C:\Users\baolatun\Documents\Visual Studio 2010\Projects\AdvNotes\AdvNotes\Bin\Debug\Microsoft.Phone.Controls.Toolkit.pdb
 C:\Users\baolatun\Documents\Visual Studio 2010\Projects\AdvNotes\AdvNotes\Bin\Debug\Microsoft.Phone.Controls.Toolkit.xml
 C:\Users\baolatun\Documents\Visual Studio 2010\Projects\AdvNotes\AdvNotes\Bin\Debug\Microsoft.Phone.Controls.xml
-C:\Users\baolatun\Documents\Visual Studio 2010\Projects\AdvNotes\AdvNotes\obj\Debug\Pages\FontPicker.g.i.cs
+C:\Users\baolatun\Documents\Visual Studio 2010\Projects\AdvNotes\AdvNotes\obj\Debug\Pages\ColorPickerPage.g.i.cs

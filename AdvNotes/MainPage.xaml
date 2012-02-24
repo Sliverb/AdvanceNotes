@@ -6,7 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-    xmlns:local="clr-namespace:AdvNotes"
+    xmlns:local="clr-namespace:AdvNotes.Include"
     mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="696" 
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -64,7 +64,7 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton IconUri="/Images/appbar.add.rest.png" Text="add note" Click="appBar_new"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/appbar.settings.rest.png" Text="help" Click="appBar_setting"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.settings.rest.png" Text="settings" Click="appBar_setting"/>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Help" Click="appBar_help"/>
                 <shell:ApplicationBarMenuItem Text="About" Click="appBar_about"/>
