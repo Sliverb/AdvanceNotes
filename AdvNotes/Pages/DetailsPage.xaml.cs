@@ -147,7 +147,10 @@ namespace AdvNotes.Pages
                 // Environment.NewLine because it's \r\n, whereas newlines inserted from
                 // a text box are just \r
                 //n.Title = title.Replace('\r', ' ');
-                n.Title = title.Remove(title.IndexOf('\r'));
+                if ((title.Length > 0) && (title.IndexOf('\r') > 0))
+                    n.Title = title.Remove(title.IndexOf('\r'));
+                else
+                    n.Title = title.Replace('\r', ' ');
 
                 n.Modified = DateTimeOffset.Now;
             }
